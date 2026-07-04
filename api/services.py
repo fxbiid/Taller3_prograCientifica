@@ -1,16 +1,9 @@
-from codigo.bibliaDataset import BibliaDataset
+from api.cache import cache
 from collections import Counter
 from codigo.textPreprocesamiento import TextPreprocesamiento
 
 def cargar_biblia():
-
-    biblia = BibliaDataset(
-        "data/t_kjv.csv",
-        "data/key_english.csv"
-    )
-
-    return biblia.load_data()
-
+    return cache.df
 
 def filtrar_biblia(df, testamento=None, libro=None, capitulo=None):
     if testamento:
@@ -48,7 +41,7 @@ def promedio_por_libro(df):
 
 
 def obtener_top_palabras(df, cantidad=20):
-    pre = TextPreprocesamiento()
+    pre = cache.preprocessor
     contador = Counter()
 
     for texto in df["t_x"]:
@@ -63,8 +56,7 @@ def obtener_top_palabras(df, cantidad=20):
     return resultado
 
 def obtener_frecuencias(df):
-
-    pre = TextPreprocesamiento()
+    pre = cache.preprocessor
 
     contador = Counter()
 
