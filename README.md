@@ -26,7 +26,7 @@
   </tr>
   <tr>
     <td><b>Sede</b></td>
-    <td>Coquimbo, Chile</td>
+    <td> Guayacan Coquimbo, Chile</td>
   </tr>
   <tr>
     <td><b>Fecha de entrega</b></td>
