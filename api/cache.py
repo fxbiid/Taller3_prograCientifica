@@ -3,7 +3,8 @@ from codigo.textPreprocesamiento import TextPreprocesamiento
 from codigo.tfIdf import TfIdf
 from codigo.buscadorSemantico import BuscadorSemantico
 from codigo.visualizacionPca import VisualizacionPca
-
+from codigo.word2vec import Word2VecModel
+from codigo.generadorNGramas import GeneradorNGramas
 
 class Cache:
 
@@ -53,8 +54,32 @@ class Cache:
             matriz,
             componentes=3
         )
+        self.word2vec = Word2VecModel()
+
+        self.word2vec.entrenar(documentos)
+
+        embeddings = self.word2vec.obtener_embeddings(documentos)
+
+        self.word2vec_pca2d, self.word2vec_varianza2d = (
+            self.visualizador.reducir_dimensiones(
+                embeddings,
+                componentes=2
+            )
+        )
+
+        self.word2vec_pca3d, self.word2vec_varianza3d = (
+            self.visualizador.reducir_dimensiones(
+                embeddings,
+                componentes=3
+            )
+        )
 
         self.buscador = BuscadorSemantico()
+        self.generador = GeneradorNGramas(2)
+
+        self.generador.entrenar(
+            self.df["t_x"].astype(str).tolist()
+        )
 
 
 cache = Cache()

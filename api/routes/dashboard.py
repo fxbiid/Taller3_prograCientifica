@@ -51,12 +51,20 @@ def filtros():
     }
 
 @router.get("/dashboard/versiculos-por-libro")
-def versiculos_por_libro(testamento: str = None):
+def versiculos_por_libro(
+        testamento: str = None,
+        libro: str = None,
+        capitulo: int = None
+):
 
     df = cargar_biblia()
 
-    if testamento:
-        df = df[df["t_y"] == testamento]
+    df = filtrar_biblia(
+        df,
+        testamento,
+        libro,
+        capitulo
+    )
 
     resultado = (
         df.groupby("n")
@@ -68,12 +76,20 @@ def versiculos_por_libro(testamento: str = None):
     return resultado.to_dict(orient="records")
 
 @router.get("/dashboard/promedio-por-libro")
-def promedio_libro(testamento: str = None):
+def promedio_libro(
+        testamento: str = None,
+        libro: str = None,
+        capitulo: int = None
+):
 
     df = cargar_biblia()
 
-    if testamento:
-        df = df[df["t_y"] == testamento]
+    df = filtrar_biblia(
+        df,
+        testamento,
+        libro,
+        capitulo
+    )
 
     df["largo"] = df["t_x"].str.len()
 

@@ -11,43 +11,51 @@ def obtener_vectorizacion(
         dimensiones: int = 2,
         limite: int = 100
 ):
+        if modelo.lower() == "tfidf":
 
-    if modelo.lower() == "tfidf":
+            if dimensiones == 3:
+                componentes = cache.pca3d
+            else:
+                componentes = cache.pca2d
 
-        if dimensiones == 3:
-            componentes = cache.pca3d
+        elif modelo.lower() == "word2vec":
+
+            if dimensiones == 3:
+                componentes = cache.word2vec_pca3d
+            else:
+                componentes = cache.word2vec_pca2d
+
         else:
-            componentes = cache.pca2d
 
-    else:
-        raise HTTPException(
-            status_code=400,
-            detail="Modelo no disponible."
-        )
+            raise HTTPException(
+                status_code=400,
+                detail="Modelo no disponible."
+            )
 
-    resultado = []
 
-    for i, fila in cache.df.head(limite).iterrows():
+        resultado = []
 
-        punto = {
+        for i, fila in cache.df.head(limite).iterrows():
 
-            "libro": fila["n"],
+            punto = {
 
-            "testamento": fila["t_y"],
+                "libro": fila["n"],
 
-            "capitulo": int(fila["c"]),
+                "testamento": fila["t_y"],
 
-            "versiculo": int(fila["v"]),
+                "capitulo": int(fila["c"]),
 
-            "x": float(componentes[i][0]),
+                "versiculo": int(fila["v"]),
 
-            "y": float(componentes[i][1])
+                "x": float(componentes[i][0]),
 
-        }
+                "y": float(componentes[i][1])
 
-        if dimensiones == 3:
-            punto["z"] = float(componentes[i][2])
+            }
 
-        resultado.append(punto)
+            if dimensiones == 3:
+                punto["z"] = float(componentes[i][2])
 
-    return resultado
+            resultado.append(punto)
+
+        return resultado
