@@ -264,9 +264,7 @@ Toda la reducción de dimensionalidad es realizada por la API.
 
 ## Generador de Texto
 
-Se implementó un generador de texto basado en modelos de N-Gramas.
-
-El usuario puede ingresar un texto inicial y la API genera automáticamente la continuación utilizando el modelo entrenado sobre el corpus bíblico.
+El usuario puede seleccionar el modelo (Unigrama, Bigrama o Trigrama), ingresar un texto inicial y definir la longitud máxima del texto generado. La API genera automáticamente la continuación utilizando el modelo seleccionado entrenado sobre el corpus bíblico.
 
 ---
 
