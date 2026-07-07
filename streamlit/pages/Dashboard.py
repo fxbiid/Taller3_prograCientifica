@@ -9,7 +9,6 @@ API = "http://127.0.0.1:8000"
 
 st.title("Dashboard")
 
-
 filtros = requests.get(f"{API}/filters").json()
 
 col1, col2, col3 = st.columns(3)
@@ -20,10 +19,21 @@ with col1:
         [""] + filtros["testamentos"]
     )
 
+# Libros disponibles según el testamento
+if testamento == "AT":
+    libros = filtros["libros"]["AT"]
+elif testamento == "NT":
+    libros = filtros["libros"]["NT"]
+else:
+    libros = (
+        filtros["libros"]["AT"] +
+        filtros["libros"]["NT"]
+    )
+
 with col2:
     libro = st.selectbox(
         "Libro",
-        [""] + filtros["libros"]
+        [""] + libros
     )
 
 with col3:
@@ -42,7 +52,6 @@ if libro:
 
 if capitulo:
     params["capitulo"] = capitulo
-
 
 dashboard = requests.get(
     f"{API}/dashboard",

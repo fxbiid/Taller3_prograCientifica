@@ -41,12 +41,19 @@ def dashboard(
     }
 @router.get("/filters")
 def filtros():
-
     df = cargar_biblia()
+    libros = {
+        "AT": sorted(
+            df[df["t_y"] == "AT"]["n"].unique().tolist()
+        ),
+        "NT": sorted(
+            df[df["t_y"] == "NT"]["n"].unique().tolist()
+        )
+    }
 
     return {
         "testamentos": sorted(df["t_y"].unique().tolist()),
-        "libros": sorted(df["n"].unique().tolist()),
+        "libros": libros,
         "capitulos": sorted(df["c"].unique().tolist())
     }
 
