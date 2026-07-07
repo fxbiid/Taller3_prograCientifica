@@ -20,15 +20,12 @@ with col1:
     )
 
 # Libros disponibles según el testamento
-if testamento == "AT":
-    libros = filtros["libros"]["AT"]
+if testamento == "OT":
+    libros = [""] + filtros["libros"]["OT"]
 elif testamento == "NT":
-    libros = filtros["libros"]["NT"]
+    libros = [""] + filtros["libros"]["NT"]
 else:
-    libros = (
-        filtros["libros"]["AT"] +
-        filtros["libros"]["NT"]
-    )
+    libros = [""] + filtros["libros"]["OT"] + filtros["libros"]["NT"]
 
 with col2:
     libro = st.selectbox(
