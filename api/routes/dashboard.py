@@ -21,13 +21,16 @@ def dashboard(
     df = cargar_biblia()
 
     df = filtrar_biblia(df, testamento, libro, capitulo)
+    if len(df) == 0:
+        largo_promedio = 0
+    else:
+        largo_promedio = round(df["t_x"].str.len().mean(), 2)
 
     return {
 
         "cantidad_versiculos": len(df),
 
-        "largo_promedio":
-            round(df["t_x"].str.len().mean(), 2),
+        "largo_promedio": largo_promedio,
 
         "versiculos_por_libro":
             cantidad_por_libro(df),
@@ -41,10 +44,12 @@ def dashboard(
     }
 @router.get("/filters")
 def filtros():
+
     df = cargar_biblia()
+
     libros = {
-        "AT": sorted(
-            df[df["t_y"] == "AT"]["n"].unique().tolist()
+        "OT": sorted(
+            df[df["t_y"] == "OT"]["n"].unique().tolist()
         ),
         "NT": sorted(
             df[df["t_y"] == "NT"]["n"].unique().tolist()
