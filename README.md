@@ -126,13 +126,13 @@ Taller3Progra
 Clonar el repositorio
 
 ```bash
-clone https://github.com/fxbiid/Taller3_prograCientifica.git
+git clone https://github.com/fxbiid/Taller3_prograCientifica.git
 ```
 
 Entrar al proyecto
 
 ```bash
-cd Taller3Progra
+cd Taller3_prograCientifica
 ```
 
 Crear entorno virtual
@@ -168,7 +168,7 @@ pip install -r requirements.txt
 ## Levantar la API
 
 ```bash
-uvicorn api.main:app --reload
+uvicorn api.main:Inicio --reload
 ```
 
 La API estará disponible en
