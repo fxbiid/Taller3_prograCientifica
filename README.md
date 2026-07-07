@@ -341,7 +341,7 @@ La aplicación permite:
 - Buscar versículos utilizando similitud semántica.
 - Visualizar representaciones vectoriales mediante PCA.
 - Comparar representaciones TF-IDF y Word2Vec.
-- Generar texto automáticamente utilizando modelos de N-Gramas.
+- Generar texto utilizando modelos Unigrama, Bigrama y Trigrama.
 - Consumir todos los servicios mediante una interfaz desarrollada en Streamlit.
 
 ---
