@@ -75,11 +75,12 @@ class Cache:
         )
 
         self.buscador = BuscadorSemantico()
-        self.generador = GeneradorNGramas(2)
+        self.generadores = {}
 
-        self.generador.entrenar(
-            self.df["t_x"].astype(str).tolist()
-        )
+        for n in [1, 2, 3]:
+            generador = GeneradorNGramas(n)
+            generador.entrenar(self.df["t_x"])
+            self.generadores[n] = generador
 
 
 cache = Cache()
